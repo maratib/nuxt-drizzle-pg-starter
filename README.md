@@ -1,11 +1,16 @@
 # Nuxt, TailwindCSS and Drizzle with pg
 
+# Adding Drizzle
+
 ```bash
 # Add drizzle with postgres driver
 yarn add drizzle-orm pg
 
 # Add drizzle tools
-yarn add -D drizzle-kit @types/pg
+yarn add -D drizzle-kit @types/pg dotenv
+
+# .env example
+DB_URL="postgres://user:password@host:5432/dbName?sslmode=require"
 
 ```
 ```javascript
@@ -52,20 +57,20 @@ export type NewUser = InferInsertModel<typeof UsersTable>
 ```javascript
 // Add ./db/migrate.ts
 
-import pg from "pg";
-import { drizzle } from "drizzle-orm/node-postgres";
 import { migrate } from "drizzle-orm/node-postgres/migrator";
+import 'dotenv/config'
 
 const { Pool } = pg;
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DB_URL,
   max: 1
 });
 
 const db = drizzle(pool);
 
 async function main() {
+  console.log("Connection String : ", process.env.DB_URL);
   console.log("migration started...");
   await migrate(db, { migrationsFolder: "./db/drizzle" });
   console.log("migration ended...");
@@ -83,16 +88,18 @@ main().catch((err) => {
 
 import pg from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
-
 import * as schema from "./schema";
+import 'dotenv/config'
 
 const { Client } = pg;
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DB_URL,
+  ssl: true
 });
 
 client.connect();
+export const db = drizzle(client, { schema: schema });
 
 ```
 ### Endpoints

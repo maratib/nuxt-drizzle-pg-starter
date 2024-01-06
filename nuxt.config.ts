@@ -1,5 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = import.meta.env.DEV
 
 export default defineNuxtConfig({
   devtools: { enabled: false },

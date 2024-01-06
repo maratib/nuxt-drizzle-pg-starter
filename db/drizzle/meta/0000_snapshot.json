@@ -1,11 +1,11 @@
 {
-  "id": "f840477c-05a2-431f-b840-2a2a5c399b9c",
+  "id": "b026db92-d487-4c95-8386-e277136f9f67",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
   "tables": {
-    "users": {
-      "name": "users",
+    "cl_users": {
+      "name": "cl_users",
       "schema": "",
       "columns": {
         "id": {
