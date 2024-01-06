@@ -1,0 +1,36 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3001",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "gen": "drizzle-kit generate:pg",
+    "gen:push": "node -r esbuild-register db/migrate.ts"
+  },
+  "devDependencies": {
+    "@headlessui/tailwindcss": "^0.2.0",
+    "@headlessui/vue": "^1.7.16",
+    "@nuxtjs/tailwindcss": "^6.10.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "@types/pg": "^8.10.9",
+    "autoprefixer": "^10.4.16",
+    "drizzle-kit": "^0.20.10",
+    "nuxt": "^3.9.0",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.0",
+    "tailwindcss-debug-screens": "^2.2.1",
+    "vue": "^3.4.5",
+    "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "drizzle-orm": "^0.29.3",
+    "drizzle-zod": "^0.5.1",
+    "pg": "^8.11.3"
+  }
+}
