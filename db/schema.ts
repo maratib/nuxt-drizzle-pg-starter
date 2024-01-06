@@ -1,7 +1,9 @@
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
 import { serial, text, timestamp, pgTable, uniqueIndex } from "drizzle-orm/pg-core";
 
-export const UsersTable = pgTable('cl_users',
+import { tableNames } from "./tables";
+
+export const UsersTable = pgTable(tableNames('users'),
   {
     id: serial('id').primaryKey(),
     name: text('name').notNull(),

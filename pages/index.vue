@@ -7,7 +7,7 @@
 <script setup lang="ts">
 // import { db } from '~/db';
 // import { UsersTable } from '~/db/schema';
-// const usersResp = await db.select().from(UsersTable).orderBy(UsersTable.name);
+// const users = await db.select().from(UsersTable).orderBy(UsersTable.name);
 
 const { data: users } = await useFetch('/api/users')
 
