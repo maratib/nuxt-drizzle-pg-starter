@@ -33,7 +33,7 @@ export default defineNuxtConfig({
 
   },
   css: ['~/assets/css/global.css'],
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxt/ui'],
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || "__session",
     cookieSecret: process.env.COOKIE_SECRET || "secret",
