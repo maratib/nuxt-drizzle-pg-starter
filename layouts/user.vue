@@ -1,9 +1,9 @@
 <template>
   <!-- <Header /> -->
   <main>
-    <nuxt-link to="/">Home</nuxt-link>
-    <h2>Admin layout</h2>
-
+    <nuxt-link to="/" class="mr-8">Home</nuxt-link>
+    <nuxt-link to="/user/me">ME</nuxt-link>
+    <h2>User layout</h2>
     <slot />
   </main>
   <!-- <Footer /> -->

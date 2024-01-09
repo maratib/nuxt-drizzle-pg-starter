@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-3xl text-red-600">Admin world!</h1>
+    <h1>Admin Home</h1>
 
   </div>
 </template>

@@ -1,10 +1,10 @@
 <template>
-  <!-- <Header /> -->
+  <Header />
   <main>
-    <h1>Default layout</h1>
+    <h2>Default layout</h2>
     <slot />
   </main>
-  <!-- <Footer /> -->
+  <Footer />
   <!-- <CookieConsent /> -->
 </template>
 

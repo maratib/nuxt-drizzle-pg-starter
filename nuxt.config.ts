@@ -1,5 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const isDev = import.meta.env.DEV
+const isDev = process.env.NODE_ENV === 'development'
+const ONE_DAY = 60 * 60 * 24 * 1000;
+const ONE_WEEK = ONE_DAY * 7;
 
 export default defineNuxtConfig({
   devtools: { enabled: false },
@@ -12,12 +14,12 @@ export default defineNuxtConfig({
       bodyAttrs: {
         class: isDev ? 'debug-screens' : ''
       },
-      title: 'MyOme',
+      title: 'MySite',
       meta: [
         { property: 'og:locale', content: 'en_US' },
-        { property: 'og:site_name', content: 'MyOme - Harnessing the True Power of Genetics' },
-        { property: 'og:url', content: 'https://myome.com/' },
-        { name: 'description', content: 'whole genome sequencing, proactive health, personal genome, pharmcogenomics, genetics, wgs, Early detection, Disease prevention,Medication management. Early Detection Medication Management Clinically Relevant.Whole Genome. We provide a more complete picture of your disease risk through clinical-grade whole genome sequencing (30x coverage) and analysis–10 times more information than other tests–including rare and common variants and structural alterations. Genetic Information for Every Stage of Your Life. Your genetic testing needs change over time' },
+        { property: 'og:site_name', content: 'MySite - Generic title' },
+        { property: 'og:url', content: 'https://example.com/' },
+        { name: 'description', content: 'description details' },
 
 
         { name: 'twitter:card', content: 'summary_large_image' },
@@ -27,6 +29,15 @@ export default defineNuxtConfig({
 
     },
   },
-  css: ['~/assets/css/styles.css'],
+  typescript: {
+
+  },
+  css: ['~/assets/css/global.css'],
   modules: ['@nuxtjs/tailwindcss'],
+  runtimeConfig: {
+    cookieName: process.env.COOKIE_NAME || "__session",
+    cookieSecret: process.env.COOKIE_SECRET || "secret",
+    cookieExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_DAY.toString(), 10), // 1 day
+    cookieRememberMeExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_WEEK.toString(), 10), // 7 days
+  },
 })
