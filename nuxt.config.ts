@@ -32,8 +32,17 @@ export default defineNuxtConfig({
   typescript: {
 
   },
-  css: ['~/assets/css/global.css'],
-  modules: ['@nuxt/ui'],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.css',
+    configPath: 'tailwind.config.ts',
+    exposeConfig: false,
+    injectPosition: 0,
+    viewer: false,
+  },
+  colorMode: {
+    classSuffix: ''
+  },
   runtimeConfig: {
     cookieName: process.env.COOKIE_NAME || "__session",
     cookieSecret: process.env.COOKIE_SECRET || "secret",

@@ -1,6 +1,9 @@
 <template>
   <div>
     <h1>User Me</h1>
+    <p>
+      {{ JSON.stringify(me1) }}
+    </p>
   </div>
 </template>
 
@@ -8,6 +11,10 @@
 definePageMeta({
   layout: 'user',
 });
+
+const { me } = useAuth();
+
+const me1 = await me();
 
 </script>
 

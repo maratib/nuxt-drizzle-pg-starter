@@ -1,0 +1,35 @@
+<template>
+  <UContainer class="grid place-content-center h-screen">
+    <UCard class="w-[500px]">
+      <template #header>
+        <h2 class="text-xl font-bold">Login</h2>
+      </template>
+
+      <UForm :state="formState">
+
+        <UFormGroup name="Email">
+          <UInput type="text" v-model="formState.email" placeholder="john@mail.com" />
+        </UFormGroup>
+
+        <UFormGroup name="Password" class="mt-4">
+          <UInput type="password" v-model="formState.password" placeholder="password" />
+        </UFormGroup>
+
+        <UButton class="mt-4">Login</UButton>
+
+
+
+
+      </UForm>
+
+    </UCard>
+  </UContainer>
+</template>
+<script setup lang="ts">
+
+const formState = ref({
+  email: '',
+  password: ''
+})
+
+</script>

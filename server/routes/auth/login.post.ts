@@ -2,6 +2,7 @@
 
 import { User } from "~/server/model/user";
 import { verify } from "~/server/utils/encrypt";
+import { INVALID_CREDENTIALS } from "~/server/utils/exceptions";
 
 export default defineEventHandler(async (event) => {
 
@@ -9,27 +10,17 @@ export default defineEventHandler(async (event) => {
 
   const { email, password, rememberMe } = body;
 
-  const user = new User()
+  const user = new User(event)
 
   // console.log(body);
 
   const userWithPassword = await user.findByEmail(email);
-  if (!userWithPassword) {
-    return createError({
-      statusCode: 401,
-      message: "Bad credentials1",
-    });
-  }
+  if (!userWithPassword) return INVALID_CREDENTIALS(event)
 
   console.log(userWithPassword);
 
   const verified = await verify(userWithPassword.password, password);
-  if (!verified) {
-    return createError({
-      statusCode: 401,
-      message: "Bad credentials2",
-    });
-  }
+  if (!verified) return INVALID_CREDENTIALS(event)
 
 
   const config = useRuntimeConfig();

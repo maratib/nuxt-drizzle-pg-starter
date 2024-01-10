@@ -7,14 +7,18 @@ import { BAD_REQUEST, RESOURCE_NOT_FOUND } from "~/server/utils/exceptions";
 import { hash } from "~/server/utils/encrypt";
 
 export class User {
-  constructor() { }
+
+
+  constructor(private event: any) { }
+
 
   async all() {
     try {
       const usersResp = await db.select().from(UsersTable);
+
       return { users: usersResp };
     } catch (e: any) {
-      BAD_REQUEST(e);
+      return BAD_REQUEST(this.event);
     }
   }
 
@@ -26,7 +30,7 @@ export class User {
         .where(eq(UsersTable.id, id));
       return usersResp?.[0];
     } catch (e: any) {
-      RESOURCE_NOT_FOUND(e);
+      return RESOURCE_NOT_FOUND(this.event);
     }
   }
 
@@ -38,7 +42,7 @@ export class User {
         .where(eq(UsersTable.user, user));
       return { user: usersResp };
     } catch (e: any) {
-      RESOURCE_NOT_FOUND(e);
+      return RESOURCE_NOT_FOUND(this.event);
     }
   }
 
@@ -50,7 +54,7 @@ export class User {
         .where(eq(UsersTable.email, email));
       return usersResp?.[0];
     } catch (e: any) {
-      RESOURCE_NOT_FOUND(e);
+      return RESOURCE_NOT_FOUND(this.event);
     }
   }
 
@@ -66,7 +70,9 @@ export class User {
         newUser: result
       }
 
-    } catch (e: any) { BAD_REQUEST(e) }
+    } catch (e: any) {
+      return BAD_REQUEST(this.event)
+    }
 
 
   } // createUser ends

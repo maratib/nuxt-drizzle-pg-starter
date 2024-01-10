@@ -4,9 +4,10 @@ import type { H3Event } from "h3";
 import { User } from "~/server/model/user";
 import { deserialize, unsign } from "./cookie";
 
-const user = new User();
-
 export async function getUserFromSession(event: H3Event) {
+
+  const user = new User(event);
+
   const config = useRuntimeConfig();
 
   const cookie = getCookie(event, config.cookieName);

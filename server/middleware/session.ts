@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
   if (user) event.context.user = user;
 
   if (path.startsWith('/api') && !user) {
-    UNAUTHORIZED("Unauthorized")
+    return UNAUTHORIZED(event)
   }
+
 })
