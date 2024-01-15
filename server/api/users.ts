@@ -1,7 +1,5 @@
 import { User } from "~/server/model/user";
 
-
-
 export default defineEventHandler(async (event) => {
 
   const user = new User(event);
@@ -15,7 +13,6 @@ export default defineEventHandler(async (event) => {
 
       const body = await readBody(event)
       const newUser = user.create(body)
-
 
       event.node.res.statusCode = 201
       return newUser;

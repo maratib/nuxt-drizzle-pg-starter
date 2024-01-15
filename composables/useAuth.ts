@@ -18,6 +18,7 @@ export const useAuth = () => {
   };
 
   const login = async (email: string, password: string, rememberMe: boolean) => {
+
     const data: IUser = await $fetch("/auth/login", {
       method: "POST",
       body: {
@@ -27,9 +28,9 @@ export const useAuth = () => {
       },
     });
 
-    console.log(data.user);
-
     setUser(data.user);
+
+    // console.log('login', authUser.value);
 
     return authUser;
 
@@ -56,16 +57,23 @@ export const useAuth = () => {
       }
     }
 
-    console.log(authUser.value);
+    // console.log(authUser.value);
 
     return authUser;
   };
+
+  const isLoggedIn = () => {
+    const authUser = useAuthUser();
+    if (!authUser.value) return false;
+    return true;
+  }
 
 
 
   return {
     login,
     logout,
+    isLoggedIn,
     me
   }
 }

@@ -1,6 +1,7 @@
 // Add ~/utils/cookie.ts
 
 import { type KeyObject, createHmac, timingSafeEqual } from "node:crypto";
+import { throwErrorResponse } from "./exceptions";
 
 export type CookieSecret = string | Buffer | KeyObject;
 
@@ -9,12 +10,7 @@ export function serialize(obj: object) {
   const length = Buffer.byteLength(value);
 
   if (length > 4096)
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Bad request",
-      message: "Cookie too large",
-    });
-
+    throwErrorResponse(400, "Bad request", "Cookie too large")
   return value;
 }
 
@@ -35,11 +31,7 @@ export function unsign(input: string, secret: CookieSecret) {
   const inputBuffer = Buffer.from(input);
 
   if (!(expectedBuffer.equals(inputBuffer) && timingSafeEqual(expectedBuffer, inputBuffer))) {
-    throw createError({
-      statusCode: 400,
-      statusMessage: "Invalid cookie signature",
-      message: "Invalid cookie signature",
-    });
+    throwErrorResponse(400, "Invalid cookie signature", "Invalid cookie signature");
   }
 
   return value;

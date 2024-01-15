@@ -30,7 +30,6 @@ export default defineNuxtConfig({
     },
   },
   typescript: {
-
   },
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
   tailwindcss: {
@@ -44,9 +43,15 @@ export default defineNuxtConfig({
     classSuffix: ''
   },
   runtimeConfig: {
-    cookieName: process.env.COOKIE_NAME || "__session",
-    cookieSecret: process.env.COOKIE_SECRET || "secret",
-    cookieExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_DAY.toString(), 10), // 1 day
-    cookieRememberMeExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_WEEK.toString(), 10), // 7 days
+    private: {
+      db: process.env.DATABASE_URL,
+      cookieName: process.env.COOKIE_NAME || "__session",
+      cookieSecret: process.env.COOKIE_SECRET || "secret",
+      cookieExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_DAY.toString(), 10), // 1 day
+      cookieRememberMeExpires: parseInt(process.env.COOKIE_REMEMBER_ME_EXPIRES || ONE_WEEK.toString(), 10), // 7 days
+    },
+    public: {
+
+    }
   },
 })

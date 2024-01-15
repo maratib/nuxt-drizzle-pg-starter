@@ -1,4 +1,5 @@
 // Add ~server/routes/login.post.ts
+// END-POINT-POST: http://localhost:3001/auth/login
 
 import { User } from "~/server/model/user";
 import { verify } from "~/server/utils/encrypt";
@@ -26,16 +27,16 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
 
   const session = serialize({ userId: userWithPassword.id });
-  const signedSession = sign(session, config.cookieSecret);
+  const signedSession = sign(session, config.private.cookieSecret);
 
-  setCookie(event, config.cookieName, signedSession, {
+  setCookie(event, config.private.cookieName, signedSession, {
     httpOnly: true,
     path: "/",
     sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
     expires: rememberMe
-      ? new Date(Date.now() + config.cookieRememberMeExpires)
-      : new Date(Date.now() + config.cookieExpires),
+      ? new Date(Date.now() + config.private.cookieRememberMeExpires)
+      : new Date(Date.now() + config.private.cookieExpires),
   });
 
   const userWithoutPassword = ({

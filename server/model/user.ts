@@ -73,10 +73,5 @@ export class User {
     } catch (e: any) {
       return BAD_REQUEST(this.event)
     }
-
-
   } // createUser ends
-
-
-
 }

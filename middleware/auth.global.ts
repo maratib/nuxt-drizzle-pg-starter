@@ -1,21 +1,49 @@
 // middleware/auth.ts
-export default defineNuxtRouteMiddleware((to, from) => {
-  const res = to?.name;
-  console.log('From auth client middleware : ', res)
-
-  const isLoggedIn = false;
-
-  // if (!isLoggedIn && res !== 'login') {
-  //   abortNavigation();
-  //   return navigateTo('/login');
-  // }
 
 
+export default defineNuxtRouteMiddleware(async (to, from) => {
+  const res = to?.name as string;
+  // console.log('From auth client middleware : ', res)
+  const authUser = useAuthUser();
+  if (!authUser.value) {
+    console.log('LOADING USER');
+    const { me } = useAuth();
+    await me();
+  }
 
-
-
-
+  if (authUser.value && res.startsWith('login')) {
+    return navigateTo('/')
+  }
 })
+
+
+
+
+
+
+
+// if (authUser.value) {
+//   if (authUser.value.roles.includes('ADMIN')) {
+//     if (!res.includes('admin')) return navigateTo({ name: 'admin' })
+//     return
+//   } else {
+//     if (!res.includes('user')) return navigateTo({ name: 'user' })
+//     return
+//   }
+
+
+// } else {
+//   return navigateTo({ name: 'login' })
+// }
+
+
+// if (!authUser.value && res !== 'login') {
+//   return navigateTo({ name: "login" });
+// } else {
+//   return navigateTo('/user/');
+// }
+
+
 
 
 // const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive

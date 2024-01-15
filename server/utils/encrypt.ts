@@ -1,4 +1,4 @@
-// Add ~/utils/encrypt.ts
+// Add ~/server/utils/encrypt.ts
 
 import { Bcrypt } from "oslo/password";
 

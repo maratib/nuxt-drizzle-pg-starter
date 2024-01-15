@@ -9,7 +9,8 @@
 
 <script lang="ts" setup>
 definePageMeta({
-  layout: 'user',
+  middleware: 'user-only',
+  layout: 'user-layout',
 });
 
 const { me } = useAuth();

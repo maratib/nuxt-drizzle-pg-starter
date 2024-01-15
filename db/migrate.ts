@@ -1,7 +1,5 @@
-import 'dotenv/config'
 import { migrate } from "drizzle-orm/node-postgres/migrator";
 import { db } from "~/db";
-
 
 async function main() {
   console.log("migration started...");

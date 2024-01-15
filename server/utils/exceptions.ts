@@ -1,9 +1,18 @@
 // Add ~/server/utils/exceptions.ts
 
-export const sendErrorResponse = (event: any, statusCode: number, message: string) => {
+export const throwErrorResponse = (statusCode: number, statusMessage: string, message: string) => {
+  throw createError({
+    statusCode: 400,
+    statusMessage: "Invalid cookie signature",
+    message: "Invalid cookie signature",
+  });
+}
+
+export const sendErrorResponse = (event: any, statusCode: number, statusMessage: string, message = '') => {
   sendError(event, createError({
     statusCode: statusCode,
     statusMessage: message,
+    message
   }));
 }
 

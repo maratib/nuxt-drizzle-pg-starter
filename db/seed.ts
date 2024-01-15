@@ -1,11 +1,7 @@
-import 'dotenv/config'
 import { faker } from "@faker-js/faker";
 import { db } from "~/db";
 import { hash } from "~/server/utils/encrypt";
 import { UsersTable, type NewUser } from './schema';
-
-if (!("DB_URL" in process.env))
-  throw new Error("DB_URL not found on .env.development");
 
 const main = async () => {
   console.log('Seeding starts ...');
@@ -37,10 +33,12 @@ const main = async () => {
   // }
 
   // console.log(data);
-  await db.insert(UsersTable).values(data)
+  try {
+    await db.insert(UsersTable).values(data)
+  } catch (error: any) {
+    console.log(error.message);
+  }
   console.log('Seeding done ...');
-
-
 }
 
 main();
